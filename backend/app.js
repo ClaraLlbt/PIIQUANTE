@@ -3,6 +3,9 @@ const bodyParser = require('body-parser');
 const mongoose = require('mongoose');
 const path = require('path');
 
+const helmet = require('helmet');
+const session = require('cookie-session');
+const nocache = require('nocache');
 const userRoutes = require('./routes/user');
 const saucesRoutes = require('./routes/sauce');
 
@@ -21,7 +24,22 @@ app.use((req, res, next) => {
   next();
 });
 
+const expiryDate = new Date(Date.now() + 300000);
+app.use(session({
+  name: 'session',
+  secret: process.env,
+  cookie: {
+    secure: true,
+    httpOnly: true,
+    domain: 'http://localhost:3000',
+    expires: expiryDate
+  }
+}));
+
 app.use(bodyParser.json());
+
+app.use(helmet());
+app.use(nocache());
 
 app.use('/api/sauces', saucesRoutes);
 app.use('/api/auth/', userRoutes);
