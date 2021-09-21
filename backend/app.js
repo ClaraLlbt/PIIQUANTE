@@ -9,7 +9,9 @@ const nocache = require('nocache');
 const userRoutes = require('./routes/user');
 const saucesRoutes = require('./routes/sauce');
 
-mongoose.connect('mongodb+srv://Clara:Kobe1310@piiquante.onzv9.mongodb.net/myFirstDatabase?retryWrites=true&w=majority',
+require('dotenv').config();
+
+mongoose.connect(process.env.DB_URI, 
   { useNewUrlParser: true,
     useUnifiedTopology: true })
   .then(() => console.log('Connexion à MongoDB réussie !'))
