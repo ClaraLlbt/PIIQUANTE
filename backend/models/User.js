@@ -1,6 +1,6 @@
 const mongoose = require('mongoose');
 const uniqueValidator = require('mongoose-unique-validator');
-require = ('mongoose-type-email');
+require('mongoose-type-email');
 const sanitizerPlugin = require('mongoose-sanitizer');
 
 const userSchema = mongoose.Schema({
