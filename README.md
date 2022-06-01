@@ -5,7 +5,7 @@
 - Angular CLI 7.0.2.
 - node-sass : Vérifier que vous utilisez la bonne version NODEJS. Pour Node 14.0, vous avez besoin de la version 4.14+ de node-sass.
 
-Sur Windows, ces installations requiére d'utiliser le console Powershell en mode administrateur.
+Sur Windows, ces installations nécessite d'utiliser le terminal Powershell en mode administrateur.
 
 # Pour commencer: 
 1. Clonez ce répertoire avec le submodule 'Web-Developer-P6'.
