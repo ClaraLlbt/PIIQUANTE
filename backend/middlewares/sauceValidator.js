@@ -17,8 +17,8 @@ exports.nameValidator = [
 exports.manufacturerValidator = [
     sauceValidate({
         validator: 'isLength',
-        arguments: [10, 20],
-        message: 'La description de la sauce doit contenir entre 10 et 20 caractères',
+        arguments: [3, 20],
+        message: 'Le nom de marque de la sauce doit contenir entre 3 et 20 caractères',
       }),
       sauceValidate({
         validator: 'matches',

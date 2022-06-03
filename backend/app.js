@@ -33,11 +33,13 @@ app.use(session({
   cookie: {
     secure: true,
     httpOnly: true,
-    domain: 'http://localhost:3000',
+    domain: 'http://localhost:8080',
     expires: expiryDate
   }
 }));
 
+//Transforme le corps de la requête en objet JS
+app.use(bodyParser.urlencoded({ extended: true }));
 app.use(bodyParser.json());
 
 app.use(helmet());
