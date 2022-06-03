@@ -2,8 +2,6 @@ const Sauce = require('../models/Sauce');
 const fs = require('fs');
 
 exports.createSauce = (req, res, next) => {
-  // const sauceObject = JSON.parse(req.body.sauce)
-  // console.log(sauceObject);
   const sauceObject = req.file ?
     {
      ...JSON.parse(req.body.sauce),
