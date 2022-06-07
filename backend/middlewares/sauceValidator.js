@@ -35,7 +35,7 @@ exports.descriptionValidator = [
     }),
     sauceValidate({
       validator: 'matches',
-      arguments: /^[a-z\d\-_\s]+$/i,
+      arguments: /^[A-ZÜ-ü\d\-_'\s]+$/i,
       message: "Vous ne pouvez utiliser que des chiffres et des lettres pour la description de la sauce",
     }),
   ];
