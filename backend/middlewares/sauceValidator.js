@@ -1,5 +1,4 @@
 const sauceValidate = require('mongoose-validator');
-const Sauce = require('../models/Sauce');
 
 exports.nameValidator = [
     sauceValidate({

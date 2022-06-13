@@ -32,6 +32,12 @@ exports.modifySauce = (req, res, next) => {
     Sauce.findOne({
       _id: req.params.id
     }).then((sauce) => {
+      const token = req.headers.authorization.split(' ')[1];
+      const decodedToken = jwt.verify(token, 'RANDOM_TOKEN_SECRET');
+      const userId = decodedToken.userId;
+      if(sauce.userId !== userId){
+        res.status(403).json({message: "Action non autorisée"})
+      } 
       const filename = sauce.imageUrl.split('/images/')[1]
       fs.unlinkSync(`images/${filename}`)
     }),
@@ -69,6 +75,12 @@ exports.deleteSauce = (req, res, next) => {
     Sauce.findOne({
       _id: req.params.id
     }).then((sauce) => {
+      const token = req.headers.authorization.split(' ')[1];
+      const decodedToken = jwt.verify(token, 'RANDOM_TOKEN_SECRET');
+      const userId = decodedToken.userId;
+      if(sauce.userId !== userId){
+        res.status(403).json({message: "Action non autorisée"})
+      }
       const filename = sauce.imageUrl.split('/images/')[1]
       fs.unlinkSync(`images/${filename}`)
     }),
