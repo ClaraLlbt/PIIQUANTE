@@ -10,7 +10,7 @@ const User = require('../models/User');
 
 // Importation de l'outil Password 
 const { isPasswordValid, validationMessages } = require('../utils/Password');
-const { encrypt, decrypt } = require ('../utils/Email');
+const { encrypt } = require ('../utils/Email');
 
 exports.signup = (req, res, next) => {
   // Vérification de la validité du mot de passe
@@ -19,10 +19,14 @@ exports.signup = (req, res, next) => {
       message: validationMessages(req.body.password)
     });
   }
+  // Vérification de la syntaxe de l'email grâce à Regex
+  else if (!/^[\w-\.]{3,20}@([\w-]{3,}\.)+[\w-]{2,4}$/.exec(req.body.email)) {
+    return res.status(400).json({error: "Email n'est pas valide. Veuillez utiliser une syntaxe correcte"}); 
+  } 
 
   // Utilise la méthode hash de bcrypt pour hasher et saler le mot de passe
   // sel = 10  nombre de fois que sera executé l'algorythme de hashage
-  // Enfin un nouvel utilisateur est créé et stocké sur la BD
+  // Enfin un nouvel utilisateur est créé en éxecutant une fonction de chiffrement de l'email avant d'être stocké sur la BD
   bcrypt.hash(req.body.password, 10)
     .then(hash => {
       const user = new User({
@@ -37,7 +41,7 @@ exports.signup = (req, res, next) => {
     .catch(error => res.status(500).json({ error: error }));
 };
 
-  exports.login = (req, res, next) => {
+exports.login = (req, res, next) => {
     User.findOne({ email: encrypt(req.body.email)})
       .then(user => {
         // Si l'adresse email ne correspond à aucun utilisateur de la BD, une erreur est renvoyée
