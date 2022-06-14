@@ -23,7 +23,6 @@ exports.signup = (req, res, next) => {
   else if (!/^[\w-\.]{3,20}@([\w-]{3,}\.)+[\w-]{2,4}$/.exec(req.body.email)) {
     return res.status(400).json({error: "Email n'est pas valide. Veuillez utiliser une syntaxe correcte"}); 
   } 
-
   // Utilise la méthode hash de bcrypt pour hasher et saler le mot de passe
   // sel = 10  nombre de fois que sera executé l'algorythme de hashage
   // Enfin un nouvel utilisateur est créé en éxecutant une fonction de chiffrement de l'email avant d'être stocké sur la BD

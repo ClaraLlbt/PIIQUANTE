@@ -15,7 +15,8 @@ const encrypt = email => {
         padding: CryptoJS.pad.Pkcs7,
     });
 
-    return encrypted.toString();    
+    return encrypted.toString();
+    
 }
 
 const decrypt = string => {
